@@ -15,21 +15,24 @@ export default function Sidebar() {
   return (
     <Box
       w={{ base: "16", md: "20" }}
-      height="dvh"
+      minH="dvh"
+      position="fixed"
+      top="0"
+      left="0"
       backgroundColor="gray.700"
       pt="5"
     >
-      <VStack display="flex" alignItems="center" gap="2" height="full">
+      <VStack display="flex" alignItems="center" gap="2" height="full" >
         {sidebarItems.map(({ href, icon: Icon }, i) => (
           <Link key={i} href={href}>
-            <Box boxSize={{ base: 10, md: 11 }} p="2" _hover={{ backgroundColor: "gray.900"}} rounded="xl">
+            <Box boxSize={{ base: 10, md: 11 }} p="2" _hover={{ backgroundColor: "gray.900" }} rounded="xl">
               <Icon color="white" height="full" width="full" />
             </Box>
           </Link>
         ))}
         <Menu.Root>
           <Menu.Trigger asChild>
-            <Box boxSize={{ base: 10, md: 11 }} p="2" _hover={{ backgroundColor: "gray.900"}} rounded="xl">
+            <Box boxSize={{ base: 10, md: 11 }} p="2" _hover={{ backgroundColor: "gray.900" }} rounded="xl">
               <UserRound color="white" height="full" width="full" cursor="pointer" />
             </Box>
           </Menu.Trigger>
