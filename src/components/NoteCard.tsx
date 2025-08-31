@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Badge, Box, HStack, Text } from "@chakra-ui/react"
-import { Note } from "../../types/Note";
+import { Note } from "../types/Note";
 
 interface NoteCardProps {
   note: Note;
@@ -16,7 +16,7 @@ export default function NoteCard({ note }: NoteCardProps) {
   const displayedContent = isExpanded ? content : content.substring(0, 500);
 
   return (
-    <Box backgroundColor="gray.700" p="6" rounded="md" maxW="xl" w="full">
+    <Box backgroundColor="gray.700" p="6" rounded="md" maxW="2xl" w="full">
       <Text color="white" fontSize="sm" mb="4">
         {displayedContent}
         {(!isExpanded && isLong) && "..."}

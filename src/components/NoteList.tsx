@@ -1,6 +1,6 @@
 import { VStack } from "@chakra-ui/react";
 import NoteCard from "./NoteCard";
-import { Note } from "../../types/Note";
+import { Note } from "../types/Note";
 
 interface NoteListProps {
   notes: Note[];

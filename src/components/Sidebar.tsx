@@ -10,7 +10,7 @@ const sidebarItems = [
 ];
 
 export default function Sidebar() {
-  const isAuth = true;
+  const isAuth = false;
 
   return (
     <Box
@@ -38,21 +38,21 @@ export default function Sidebar() {
           </Menu.Trigger>
           <Portal>
             <Menu.Positioner>
-              <Menu.Content>
+              <Menu.Content backgroundColor="gray.900">
                 {isAuth ? (
                   <Box>
                     <Link href="/profile">
-                      <Menu.Item value="profile">Profile</Menu.Item>
+                      <Menu.Item value="profile" color="white">Profile</Menu.Item>
                     </Link>
-                    <Menu.Item value="logout">Logout</Menu.Item>
+                    <Menu.Item value="logout" color="white">Logout</Menu.Item>
                   </Box>
                 ) : (
                   <Box>
                     <Link href="/login">
-                      <Menu.Item value="login">Login</Menu.Item>
+                      <Menu.Item value="login" color="white">Login</Menu.Item>
                     </Link>
                     <Link href="/sign-up">
-                      <Menu.Item value="sign-up">Sign-Up</Menu.Item>
+                      <Menu.Item value="sign-up" color="white">Sign-Up</Menu.Item>
                     </Link>
                   </Box>
                 )}

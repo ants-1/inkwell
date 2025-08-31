@@ -1,7 +1,7 @@
 "use client";
 
 import { Box, Button, Textarea, HStack } from "@chakra-ui/react"
-import { Note } from "../../types/Note";
+import { Note } from "../types/Note";
 import { useState } from "react";
 
 interface NoteInputProps {
