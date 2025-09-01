@@ -8,7 +8,7 @@ interface NoteListProps {
 
 export default function NoteList({ notes }: NoteListProps) {
   return (
-    <VStack w="full" mt="10">
+    <VStack w="full" mt="4">
       {notes.map((note, i) => (
         <NoteCard key={i} note={note} />
       ))}

@@ -1,16 +1,17 @@
 import { Box, VStack, Menu, Portal } from "@chakra-ui/react";
+import { Tooltip } from "@/components/ui/tooltip"
 import { Bell, NotepadText, UsersRound, Wrench, UserRound } from "lucide-react";
 import Link from "next/link";
 
 const sidebarItems = [
-  { href: "/notes", icon: NotepadText },
-  { href: "/teams", icon: UsersRound },
-  { href: "/notifications", icon: Bell },
-  { href: "/settings", icon: Wrench },
+  { href: "/notes", icon: NotepadText, tooltip: "My Notes" },
+  { href: "/teams", icon: UsersRound, tooltip: "Teams" },
+  { href: "/notifications", icon: Bell, tooltip: "Notifications" },
+  { href: "/settings", icon: Wrench, tooltip: "Settings" },
 ];
 
 export default function Sidebar() {
-  const isAuth = false;
+  const isAuth = true;
 
   return (
     <Box
@@ -23,11 +24,13 @@ export default function Sidebar() {
       pt="5"
     >
       <VStack display="flex" alignItems="center" gap="2" height="full" >
-        {sidebarItems.map(({ href, icon: Icon }, i) => (
+        {sidebarItems.map(({ href, icon: Icon, tooltip }, i) => (
           <Link key={i} href={href}>
-            <Box boxSize={{ base: 10, md: 11 }} p="2" _hover={{ backgroundColor: "gray.900" }} rounded="xl">
-              <Icon color="white" height="full" width="full" />
-            </Box>
+            <Tooltip content={tooltip}>
+              <Box boxSize={{ base: 10, md: 11 }} p="2" _hover={{ backgroundColor: "gray.900" }} rounded="xl">
+                <Icon color="white" height="full" width="full" />
+              </Box>
+            </Tooltip>
           </Link>
         ))}
         <Menu.Root>
