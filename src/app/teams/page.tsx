@@ -63,7 +63,7 @@ export default function TeamsPage() {
         <Flex>
           {/* Top-level: Teams */}
           <Tabs.Root variant="outline" defaultValue={teams[0].name} width="xl">
-            <Tabs.List colorPalette="blue">
+            <Tabs.List>
               {teams.map((team: Team, index: number) => (
                 <Tabs.Trigger key={index} value={team.name} color="white">
                   {team.name}
