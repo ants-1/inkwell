@@ -5,7 +5,7 @@ import typeDefs from "./schema";
 import resolvers from "./resolvers";
 import connectDB from "./db";
 
-connectDB();
+await connectDB();
 
 const server = new ApolloServer({
   resolvers,
@@ -16,7 +16,6 @@ const handler = startServerAndCreateNextHandler<NextRequest>(server, {
   context: async (req, res) => ({
     req,
     res,
-    dataSources: {},
   }),
 });
 
