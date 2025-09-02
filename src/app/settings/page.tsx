@@ -1,7 +1,7 @@
 "use client";
 
 import Sidebar from "@/components/Sidebar";
-import { Box, Tabs, Text, VStack } from "@chakra-ui/react";
+import { Box, Tabs, Heading, VStack } from "@chakra-ui/react";
 import { useState } from "react";
 
 export default function SettingsPage() {
@@ -11,8 +11,8 @@ export default function SettingsPage() {
     <Box backgroundColor="gray.800" display="flex" ml={{ base: "16", md: "20" }} color="white">
       <Sidebar />
       <VStack w="full" minH="dvh" my="7" px="10" mb="5">
-        <Text color="white" fontSize="xl">Settings</Text>
-        <Tabs.Root value={value} onValueChange={(e) => setValue(e.value)} colorPalette="blue" width="xl">
+        <Heading size="xl" mb="5" color="white">Settings</Heading>
+        <Tabs.Root value={value} onValueChange={(e) => setValue(e.value)} colorPalette="blue" width="xl" variant="outline">
           <Tabs.List>
             <Tabs.Trigger value="theme" colorPalette="blue" color="white">Theme</Tabs.Trigger>
             <Tabs.Trigger value="notifications" colorPalette="blue" color="white">Notifications</Tabs.Trigger>

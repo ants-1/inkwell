@@ -1,7 +1,7 @@
 "use client"
 
 import Sidebar from "@/components/Sidebar";
-import { Box, Text, Flex, Tabs, VStack } from "@chakra-ui/react";
+import { Box, Text, Flex, Tabs, VStack, Heading } from "@chakra-ui/react";
 import { Team } from "@/types/Team";
 import { mockNotesData } from "@/lib/mock-data";
 import NoteList from "@/components/NoteList";
@@ -59,10 +59,10 @@ export default function TeamsPage() {
     <Box backgroundColor="gray.800" display="flex" ml={{ base: "16", md: "20" }}>
       <Sidebar />
       <VStack w="full" minH="dvh" h="full" my="7" px="10">
-        <Text color="white" fontSize="xl">Teams</Text>
+        <Heading size="xl" color="white" mb="5">Teams</Heading>
         <Flex>
           {/* Top-level: Teams */}
-          <Tabs.Root defaultValue={teams[0].name} width="xl">
+          <Tabs.Root variant="outline" defaultValue={teams[0].name} width="xl">
             <Tabs.List colorPalette="blue">
               {teams.map((team: Team, index: number) => (
                 <Tabs.Trigger key={index} value={team.name} color="white">

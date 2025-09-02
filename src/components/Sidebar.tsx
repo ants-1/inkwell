@@ -1,12 +1,11 @@
 import { Box, VStack, Menu, Portal } from "@chakra-ui/react";
 import { Tooltip } from "@/components/ui/tooltip"
-import { Bell, NotepadText, UsersRound, Wrench, UserRound } from "lucide-react";
+import { NotepadText, UsersRound, Wrench, UserRound } from "lucide-react";
 import Link from "next/link";
 
 const sidebarItems = [
   { href: "/notes", icon: NotepadText, tooltip: "My Notes" },
   { href: "/teams", icon: UsersRound, tooltip: "Teams" },
-  { href: "/notifications", icon: Bell, tooltip: "Notifications" },
   { href: "/settings", icon: Wrench, tooltip: "Settings" },
 ];
 
