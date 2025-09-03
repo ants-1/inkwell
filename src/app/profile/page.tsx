@@ -5,7 +5,7 @@ import Sidebar from "@/components/Sidebar";
 
 export default function ProfilePage() {
   return (
-    <VStack backgroundColor="gray.800" ml={{ base: "16", md: "20" }} color="white" minH="dvh">
+    <VStack ml={{ base: "16", md: "20" }} color="white" minH="dvh">
       <Sidebar />
       <VStack align="center" my="7">
         <Avatar.Root size="2xl">

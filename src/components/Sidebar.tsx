@@ -37,15 +37,19 @@ export default function Sidebar() {
         ))}
         <Menu.Root>
           <Menu.Trigger asChild>
+
             <Box boxSize={{ base: 10, md: 11 }} p="2" _hover={{ backgroundColor: "gray.900" }} rounded="xl">
-              <UserRound color="white" height="full" width="full" cursor="pointer" />
+              <Tooltip content={session ? "User" : "Login/Sign-Up"}>
+                <UserRound color="white" height="full" width="full" cursor="pointer" />
+              </Tooltip>
             </Box>
+
           </Menu.Trigger>
           <Portal>
             <Menu.Positioner>
               <Menu.Content backgroundColor="gray.900">
                 {session ? (
-                  <Box>
+                  <Box >
                     <Link href="/profile">
                       <Menu.Item
                         value="profile"

@@ -12,7 +12,7 @@ export default function SettingsPage() {
       <Sidebar />
       <VStack w="full" minH="dvh" my="7" px="10" mb="5">
         <Heading size="xl" mb="5" color="white">Settings</Heading>
-        <Tabs.Root value={value} onValueChange={(e) => setValue(e.value)} colorPalette="blue" width="xl" variant="outline">
+        <Tabs.Root value={value} onValueChange={(e) => setValue(e.value)} colorPalette="blue" w="full" maxW="2xl" variant="outline">
           <Tabs.List>
             <Tabs.Trigger value="theme" colorPalette="blue" color="white">Theme</Tabs.Trigger>
             <Tabs.Trigger value="notifications" colorPalette="blue" color="white">Notifications</Tabs.Trigger>

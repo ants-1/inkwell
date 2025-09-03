@@ -1,3 +1,4 @@
+import { Team } from "@/types/Team";
 import { Note } from "../types/Note";
 
 export const mockNotesData: Note[] = [
@@ -27,4 +28,40 @@ export const mockNotesData: Note[] = [
     date: "Sun 31 Aug 10:00",
     tags: ["Test", "First Note"],
   },
+];
+
+export const mockTeamsData: Team[] = [
+  {
+    name: "My Team",
+    members: [
+      { name: "MaxPower20" },
+    ],
+    folders: [
+      {
+        name: "First Folder",
+        notes: mockNotesData
+      },
+      {
+        name: "Second Folder",
+        notes: mockNotesData
+      }
+    ]
+  },
+  {
+    name: "Work Team",
+    members: [
+      { name: "MaxPower20" },
+      { name: "BillyBob" }
+    ],
+    folders: [
+      {
+        name: "First Folder",
+        notes: mockNotesData
+      },
+      {
+        name: "Second Folder",
+        notes: []
+      }
+    ]
+  }
 ];
