@@ -1,4 +1,5 @@
 import userModel from "./models/userModel";
+import bcrypt from "bcryptjs";
 
 const resolvers = {
   Query: {
@@ -13,7 +14,14 @@ const resolvers = {
   Mutation: {
     createUser: async (_: any, { input }: any) => {
       try {
-        return await userModel.create(input);
+        const hashedPassword = await bcrypt.hash(input.password, 10);
+
+        const user = await userModel.create({
+          ...input,
+          password: hashedPassword,
+        });
+
+        return user;
       } catch (err) {
         throw new Error("Failed to create user");
       }

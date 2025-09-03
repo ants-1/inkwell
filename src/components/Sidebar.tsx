@@ -1,7 +1,10 @@
+"use client";
+
 import { Box, VStack, Menu, Portal } from "@chakra-ui/react";
 import { Tooltip } from "@/components/ui/tooltip"
 import { NotepadText, UsersRound, Wrench, UserRound } from "lucide-react";
 import Link from "next/link";
+import { useSession, signOut } from "next-auth/react";
 
 const sidebarItems = [
   { href: "/notes", icon: NotepadText, tooltip: "My Notes" },
@@ -10,7 +13,7 @@ const sidebarItems = [
 ];
 
 export default function Sidebar() {
-  const isAuth = true;
+  const { data: session } = useSession();
 
   return (
     <Box
@@ -41,20 +44,47 @@ export default function Sidebar() {
           <Portal>
             <Menu.Positioner>
               <Menu.Content backgroundColor="gray.900">
-                {isAuth ? (
+                {session ? (
                   <Box>
                     <Link href="/profile">
-                      <Menu.Item value="profile" color="white">Profile</Menu.Item>
+                      <Menu.Item
+                        value="profile"
+                        color="white"
+                        cursor="pointer"
+                      >
+                        Profile
+                      </Menu.Item>
                     </Link>
-                    <Menu.Item value="logout" color="white">Logout</Menu.Item>
+                    <Link href="/notes">
+                      <Menu.Item
+                        value="logout"
+                        color="white"
+                        onClick={() => signOut()}
+                        cursor="pointer"
+                      >
+                        Logout
+                      </Menu.Item>
+                    </Link>
                   </Box>
                 ) : (
                   <Box>
                     <Link href="/login">
-                      <Menu.Item value="login" color="white">Login</Menu.Item>
+                      <Menu.Item
+                        value="login"
+                        color="white"
+                        cursor="pointer"
+                      >
+                        Login
+                      </Menu.Item>
                     </Link>
                     <Link href="/sign-up">
-                      <Menu.Item value="sign-up" color="white">Sign-Up</Menu.Item>
+                      <Menu.Item
+                        value="sign-up"
+                        color="white"
+                        cursor="pointer"
+                      >
+                        Sign-Up
+                      </Menu.Item>
                     </Link>
                   </Box>
                 )}

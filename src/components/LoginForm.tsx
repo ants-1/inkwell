@@ -3,6 +3,8 @@
 import { Box, Button, Field, HStack, Input, Stack, Text } from "@chakra-ui/react";
 import Link from "next/link";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 interface LoginFormValues {
   email: string;
@@ -15,11 +17,34 @@ export default function LoginForm() {
     handleSubmit,
     formState: { errors },
   } = useForm<LoginFormValues>();
+  const router = useRouter();
 
-  const onSubmit: SubmitHandler<LoginFormValues> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<LoginFormValues> = async (data) => {
+    const res = await signIn("credentials", {
+      redirect: false,
+      email: data.email,
+      password: data.password
+    });
+
+    if (res?.error) {
+      alert("Error with logging in");
+    } else {
+      alert("Logged in successfully");
+      router.push("/notes");
+    }
+  };
 
   return (
-    <Box as="form" onSubmit={handleSubmit(onSubmit)} maxW="sm" w="full" p="6" backgroundColor="gray.700" color="white" rounded="xl">
+    <Box
+      as="form"
+      onSubmit={handleSubmit(onSubmit)}
+      maxW="sm"
+      w="full"
+      p="6"
+      backgroundColor="gray.700"
+      color="white"
+      rounded="xl"
+    >
       <Stack gap="4">
         <Text fontWeight="bold" textAlign="center">Inkwell - Login</Text>
 

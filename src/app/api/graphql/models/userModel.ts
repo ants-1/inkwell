@@ -1,7 +1,7 @@
 import mongoose, { Schema, ObjectId, Model } from "mongoose";
 
-export interface IUser {
-  _id: ObjectId;
+
+export interface IUser extends Document {
   username: string;
   email: string;
   password: string;

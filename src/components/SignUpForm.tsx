@@ -15,15 +15,36 @@ export default function SignUpForm() {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm<SignUpFormValues>();
 
-  const onSubmit: SubmitHandler<SignUpFormValues> = (data) => console.log(data);
-  console.log(watch("username"));
+  const onSubmit: SubmitHandler<SignUpFormValues> = async (data) => {
+    const res = await fetch("/api/auth/signup", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+
+    if (!res.ok) {
+      const err = await res.json();
+      console.error("Signup failed:", err);
+      return;
+    }
+
+    console.log("Signup successful");
+  }
 
   return (
-    <Box as="form" onSubmit={handleSubmit(onSubmit)} maxW="sm" w="full" p="6" backgroundColor="gray.700" color="white" rounded="xl">
+    <Box
+      as="form"
+      onSubmit={handleSubmit(onSubmit)}
+      maxW="sm"
+      w="full"
+      p="6"
+      backgroundColor="gray.700"
+      color="white"
+      rounded="xl"
+    >
       <Stack gap="4">
         <Text fontWeight="bold" textAlign="center">Inkwell - Sign Up</Text>
         <Field.Root invalid={!!errors.username}>
@@ -40,13 +61,13 @@ export default function SignUpForm() {
 
         <Field.Root invalid={!!errors.password}>
           <Field.Label>Password</Field.Label>
-          <Input {...register("password", { required: "Password is required" })} />
+          <Input type="password" {...register("password", { required: "Password is required" })} />
           <Field.ErrorText>{errors.password?.message}</Field.ErrorText>
         </Field.Root>
 
         <Field.Root invalid={!!errors.confirmPassword}>
           <Field.Label>Confirm Password</Field.Label>
-          <Input {...register("confirmPassword", { required: "Confirm Password is required" })} />
+          <Input type="password" {...register("confirmPassword", { required: "Confirm Password is required" })} />
           <Field.ErrorText>{errors.confirmPassword?.message}</Field.ErrorText>
         </Field.Root>
 
