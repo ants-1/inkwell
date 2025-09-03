@@ -2,7 +2,7 @@
 
 import { Box, VStack, Menu, Portal } from "@chakra-ui/react";
 import { Tooltip } from "@/components/ui/tooltip"
-import { NotepadText, UsersRound, Wrench, UserRound } from "lucide-react";
+import { NotepadText, UsersRound, Wrench, UserRound, House } from "lucide-react";
 import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
 
@@ -26,18 +26,29 @@ export default function Sidebar() {
       pt="5"
     >
       <VStack display="flex" alignItems="center" gap="2" height="full" >
-        {sidebarItems.map(({ href, icon: Icon, tooltip }, i) => (
-          <Link key={i} href={href}>
-            <Tooltip content={tooltip}>
+        {session ? (
+          <>
+            {sidebarItems.map(({ href, icon: Icon, tooltip }, i) => (
+              <Link key={i} href={href}>
+                <Tooltip content={tooltip}>
+                  <Box boxSize={{ base: 10, md: 11 }} p="2" _hover={{ backgroundColor: "gray.900" }} rounded="xl">
+                    <Icon color="white" height="full" width="full" />
+                  </Box>
+                </Tooltip>
+              </Link>
+            ))}
+          </>
+        ) : (
+          <Link href="/">
+            <Tooltip content="Home">
               <Box boxSize={{ base: 10, md: 11 }} p="2" _hover={{ backgroundColor: "gray.900" }} rounded="xl">
-                <Icon color="white" height="full" width="full" />
+                <House color="white" height="full" width="full" />
               </Box>
             </Tooltip>
           </Link>
-        ))}
+        )}
         <Menu.Root>
           <Menu.Trigger asChild>
-
             <Box boxSize={{ base: 10, md: 11 }} p="2" _hover={{ backgroundColor: "gray.900" }} rounded="xl">
               <Tooltip content={session ? "User" : "Login/Sign-Up"}>
                 <UserRound color="white" height="full" width="full" cursor="pointer" />
@@ -63,7 +74,7 @@ export default function Sidebar() {
                       <Menu.Item
                         value="logout"
                         color="white"
-                        onClick={() => signOut()}
+                        onClick={() => signOut({ callbackUrl: "/" })}
                         cursor="pointer"
                       >
                         Logout

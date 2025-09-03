@@ -56,7 +56,7 @@ export default function LoginForm() {
 
         <Field.Root invalid={!!errors.password}>
           <Field.Label>Password</Field.Label>
-          <Input {...register("password", { required: "Password is required" })} />
+          <Input type="password" autoSave="false" {...register("password", { required: "Password is required" })} />
           <Field.ErrorText>{errors.password?.message}</Field.ErrorText>
         </Field.Root>
 
