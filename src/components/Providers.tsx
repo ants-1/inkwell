@@ -2,15 +2,20 @@
 
 import { Provider as ChakraProvider } from "@/components/ui/provider";
 import { SessionProvider } from "next-auth/react";
+import { ReactNode } from "react";
+import client from "@/lib/apolloClient"; 
+import { ApolloProvider } from "@apollo/client/react";
 
-export default function Providers({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+interface ProvidersProps {
+  children: ReactNode;
+}
+
+export default function Providers({ children }: ProvidersProps) {
   return (
     <SessionProvider>
-      <ChakraProvider>{children}</ChakraProvider>
+      <ApolloProvider client={client}>
+        <ChakraProvider>{children}</ChakraProvider>
+      </ApolloProvider>
     </SessionProvider>
   );
 }

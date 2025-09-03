@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
-import connectDB from "../../graphql/db";
+import connectDB from "../../../../lib/db";
 import userModel from "../../graphql/models/userModel";
 
 export async function POST(req: Request) {

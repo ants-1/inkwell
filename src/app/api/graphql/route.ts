@@ -3,7 +3,7 @@ import { ApolloServer } from "@apollo/server";
 import { NextRequest } from "next/server";
 import typeDefs from "./schema";
 import resolvers from "./resolvers";
-import connectDB from "./db";
+import connectDB from "../../../lib/db";
 
 await connectDB();
 
