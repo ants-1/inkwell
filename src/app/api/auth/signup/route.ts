@@ -28,6 +28,8 @@ export async function POST(req: Request) {
       password: hashedPassword,
     });
 
+    // Create My Team and Folder for user
+
     return NextResponse.json(
       { id: user._id, email: user.email, username: user.username },
       { status: 201 }

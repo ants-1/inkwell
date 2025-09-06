@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <Stack display="flex" alignItems="center" justifyContent="center" minH="dvh" h="full" ml={{ base: "16", md: "20" }}>
       <Sidebar />
-      <VStack spaceY="8" textAlign="center" maxW="2xl">
+      <VStack spaceY="8" textAlign="center" maxW="lg">
         <Heading size="3xl" color="white">
           Welcome to Inkwell
         </Heading>
