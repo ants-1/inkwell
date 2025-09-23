@@ -2,33 +2,40 @@ import { gql } from "graphql-tag";
 
 export const teamTypeDefs = gql`
   type Member {
-    name: String!
+    user: User!
+    role: String!
   }
 
   input MemberInput {
-    name: String!
+    userId: ID!
+    role: String
   }
 
   type Team {
     _id: ID!
     name: String!
+    teamType: String
     members: [Member!]!
     folders: [Folder!]!
   }
 
   input TeamInput {
     name: String!
-    members: [MemberInput!]!
-    folders: [FolderInput!]!
+    userId: ID!
   }
 
-  extend type Query {
-    teams: [Team!]!
-    team(name: String!): Team
+  type Query {
+    teams(userId: ID!): [Team!]
+    team(_id: ID!): Team
+    myTeam(userId: ID!): Team
   }
 
-  extend type Mutation {
+  type Mutation {
+    createDefaultTeam(input: TeamInput!): Team!
     createTeam(input: TeamInput!): Team!
-    addNote(teamId: ID!, folderId: ID!, note: NoteInput!): Folder!
+    editTeam(teamId: ID!, userId: ID!, name: String, teamType: String): Team!
+    deleteTeam(teamId: ID!, userId: ID!): Boolean!
+    addMember(teamId: ID!, member: MemberInput!): Team!
+    removeMember(teamId: ID!, userId: ID!): Team!
   }
 `;
