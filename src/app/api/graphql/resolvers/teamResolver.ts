@@ -77,11 +77,17 @@ export const teamResolvers = {
       try {
         const members = [{ user: input.userId, role: "host" }];
 
+        // Create default folder
+        const defaultFolder = await folderModel.create({
+          name: "General",
+          notes: [],
+        });
+
         const newTeam = await teamModel.create({
           name: input.name,
           members,
           teamType: "custom",
-          folders: [],
+          folders: [[defaultFolder._id]],
         });
 
         await newTeam.populate([{ path: "folders" }, { path: "members.user" }]);
