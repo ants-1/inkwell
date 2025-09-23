@@ -9,14 +9,21 @@ export const noteTypeDefs = gql`
     tags: [String!]!
   }
 
-  type Query {
-    notes: [Note]
-  }
-
   input NoteInput {
     author: String!
     content: String!
-    date: String!
+    date: String
     tags: [String!]!
+  }
+
+  type Query {
+    getNotesByFolder(folderId: ID!): [Note!]! 
+    getNote(_id: ID!): Note
+  }
+
+  type Mutation {
+    createNote(folderId: ID!, input: NoteInput!): Note!
+    editNote(_id: ID!, input: NoteInput!): Note!
+    deleteNote(_id: ID!, folderId: ID!): Boolean!
   }
 `;
