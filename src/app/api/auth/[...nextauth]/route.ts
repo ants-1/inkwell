@@ -19,7 +19,10 @@ const authOptions: NextAuthOptions = {
         const user = await userModel.findOne({ email: credentials.email });
         if (!user) return null;
 
-        const isValid = await bcrypt.compare(credentials.password, user.password);
+        const isValid = await bcrypt.compare(
+          credentials.password,
+          user.password
+        );
         if (!isValid) return null;
 
         return {
@@ -32,6 +35,24 @@ const authOptions: NextAuthOptions = {
   ],
   session: { strategy: "jwt" as const },
   secret: process.env.NEXTAUTH_SECRET,
+
+  callbacks: {
+    // Save id to the JWT
+    async jwt({ token, user }) {
+      if (user) {
+        token.id = user.id;
+      }
+      return token;
+    },
+
+    // Expose id in the session
+    async session({ session, token }) {
+      if (token?.id) {
+        (session.user as any).id = token.id;
+      }
+      return session;
+    },
+  },
 };
 
 const handler = NextAuth(authOptions);

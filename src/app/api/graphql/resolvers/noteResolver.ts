@@ -1,3 +1,4 @@
+import { formattedNowDate } from "@/utils/formattedDates";
 import folderModel from "../models/folderModel";
 import noteModel from "../models/noteModel";
 
@@ -25,9 +26,11 @@ export const noteResolvers = {
   Mutation: {
     createNote: async (_: any, { folderId, input }: any) => {
       try {
+        const now = new Date();
+
         const note = await noteModel.create({
           ...input,
-          date: input.date ? new Date(input.date) : new Date(),
+          date: formattedNowDate(now),
         });
 
         await folderModel.findByIdAndUpdate(folderId, {

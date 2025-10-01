@@ -41,23 +41,17 @@ export const teamResolvers = {
     createDefaultTeam: async (_: any, { input }: any) => {
       try {
         const folderIds = [];
-
-        // Create default folder
         const defaultFolder = await folderModel.create({
           name: "General",
           notes: [],
         });
         folderIds.push(defaultFolder._id);
-
-        // Create memebers with creator as host
         const members = [
           {
             user: input.userId,
             role: "host",
           },
         ];
-
-        // Create team
         const newTeam = await teamModel.create({
           name: input.name,
           members,
@@ -77,7 +71,6 @@ export const teamResolvers = {
       try {
         const members = [{ user: input.userId, role: "host" }];
 
-        // Create default folder
         const defaultFolder = await folderModel.create({
           name: "General",
           notes: [],

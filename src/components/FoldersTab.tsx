@@ -16,9 +16,11 @@ export default function FoldersTab({defaultFolder, folders, addNote}: FoldersTab
     <Tabs.Root
       variant="enclosed"
       defaultValue={defaultFolder}
+      maxW="2xl" 
+      w="full"
     >
       <Tabs.List>
-        {folders.map((folder: Folder, index: number) => (
+        {folders?.map((folder: Folder, index: number) => (
           <Tabs.Trigger key={index} value={folder.name}>
             <FolderOpen size={16} />
             {folder.name} ({folder.notes.length})
@@ -26,9 +28,9 @@ export default function FoldersTab({defaultFolder, folders, addNote}: FoldersTab
         ))}
       </Tabs.List>
 
-      {folders.map((folder: Folder, index: number) => (
+      {folders?.map((folder: Folder, index: number) => (
         <Tabs.Content key={index} value={folder.name}>
-          <NoteInput onAddNote={addNote} />
+          <NoteInput folderId={folder._id} onAddNote={addNote} />
           <NoteList notes={folder.notes} />
         </Tabs.Content>
       ))}

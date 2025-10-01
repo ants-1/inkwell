@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Badge, Box, HStack, Text } from "@chakra-ui/react"
 import { Note } from "../types/Note";
+import { formattedNowDate } from "@/utils/formattedDates";
 
 interface NoteCardProps {
   note: Note;
@@ -14,6 +15,7 @@ export default function NoteCard({ note }: NoteCardProps) {
 
   const isLong = content.length > 500;
   const displayedContent = isExpanded ? content : content.substring(0, 500);
+  const timestamp = formattedNowDate(date);
 
   return (
     <Box backgroundColor="gray.700" p="6" rounded="md" maxW="2xl" w="full">
@@ -47,7 +49,7 @@ export default function NoteCard({ note }: NoteCardProps) {
           {author}
         </Text>
         <Text color="white" fontSize="sm">
-          Created: {date}
+          Created At: {timestamp}
         </Text>
       </Box>
     </Box>

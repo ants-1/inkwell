@@ -3,7 +3,7 @@ import mongoose, { Schema, Model } from "mongoose";
 export interface INote extends Document {
   author: string;
   content: string;
-  date: Date;
+  date: string;
   tags: string[];
 }
 
@@ -19,8 +19,7 @@ const noteSchema = new Schema<INote, NoteModel>({
     required: true,
   },
   date: {
-    type: Date,
-    default: Date.now()
+    type: String,
   },
   tags: [
     { type: String }

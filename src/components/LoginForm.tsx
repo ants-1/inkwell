@@ -27,9 +27,8 @@ export default function LoginForm() {
     });
 
     if (res?.error) {
-      alert("Error with logging in");
+      alert(`Error with logging in: ${res?.error}`);
     } else {
-      alert("Logged in successfully");
       router.push("/notes");
     }
   };
