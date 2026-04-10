@@ -1,6 +1,11 @@
 import express, { Application } from "express";
 import morgan from "morgan";
 import cors from "cors";
+import session from "express-session";
+import passport from "passport";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const app: Application = express();
 
@@ -14,8 +19,28 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get('/', (req, res) => {
-  res.json({ message: 'Hello World - Authentication Server' });
+// Session config
+app.use(
+  session({
+    secret: process.env.SECRET_KEY as string,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      secure: false, // Set to true in production with HTTPS
+      maxAge: 24 * 60 * 60 * 1000,
+    },
+  }),
+);
+
+// Passport config
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.get("/", (req, res) => {
+  res.json({
+    message: "Hello World - Authentication Server",
+    authenticated: req.isAuthenticated ? req.isAuthenticated() : false,
+  });
 });
 
 export default app;
