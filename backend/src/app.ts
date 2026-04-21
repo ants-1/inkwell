@@ -4,7 +4,9 @@ import cors from "cors";
 import session from "express-session";
 import passport from "passport";
 import dotenv from "dotenv";
-import "./config/passport";
+
+import authRoutes from "./features/auth/authRoutes";
+import { veriftyToken } from "./middleware/authMiddleware";
 
 dotenv.config();
 
@@ -37,11 +39,17 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use("/", authRoutes);
+
 app.get("/", (req, res) => {
   res.json({
     message: "Hello World - Authentication Server",
     authenticated: req.isAuthenticated ? req.isAuthenticated() : false,
   });
+});
+
+app.get("/profile", veriftyToken, (req, res) => {
+  res.json(req.user);
 });
 
 export default app;
