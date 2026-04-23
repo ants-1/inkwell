@@ -8,7 +8,7 @@ export const generateToken = (userId: string) => {
   });
 };
 
-export const veriftyToken = async (
+export const verifyToken = async (
   req: Request,
   res: Response,
   next: NextFunction,

@@ -6,7 +6,7 @@ import passport from "passport";
 import dotenv from "dotenv";
 
 import authRoutes from "./features/auth/authRoutes";
-import { veriftyToken } from "./middleware/authMiddleware";
+import userRoutes from "./features/users/userRoutes";
 import { errorHandler } from "./middleware/errorHandler";
 
 dotenv.config();
@@ -41,16 +41,13 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use("/", authRoutes);
+app.use("/", userRoutes);
 
 app.get("/", (req, res) => {
   res.json({
     message: "Hello World - Authentication Server",
     authenticated: req.isAuthenticated ? req.isAuthenticated() : false,
   });
-});
-
-app.get("/profile", veriftyToken, (req, res) => {
-  res.json(req.user);
 });
 
 app.use(errorHandler);
