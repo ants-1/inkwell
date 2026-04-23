@@ -5,12 +5,12 @@ const router = Router();
 
 router.post(
     "/login",
-    loginController
+    loginController,
 );
 
 router.post(
     "/register",
-    registerController   
+    registerController,
 );
 
 export default router;

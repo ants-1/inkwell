@@ -7,6 +7,7 @@ import dotenv from "dotenv";
 
 import authRoutes from "./features/auth/authRoutes";
 import { veriftyToken } from "./middleware/authMiddleware";
+import { errorHandler } from "./middleware/errorHandler";
 
 dotenv.config();
 
@@ -51,5 +52,7 @@ app.get("/", (req, res) => {
 app.get("/profile", veriftyToken, (req, res) => {
   res.json(req.user);
 });
+
+app.use(errorHandler);
 
 export default app;

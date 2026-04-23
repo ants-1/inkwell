@@ -1,19 +1,32 @@
 import { generateToken } from "../../middleware/authMiddleware";
+import { ApiError } from "../../utils/apiError";
 import User, { IUser } from "../users/userModel";
+import { loginSchema, registerSchema } from "./authValidation";
 
 export const loginService = async (username: string, password: string) => {
+  const result = loginSchema.safeParse({
+    username,
+    password,
+  });
+
+  if (!result.success) {
+    throw result.error;
+  } else {
+    result.data;
+  }
+
   const user: IUser | null = await User.findOne({ username }).select(
     "+password",
   );
 
   if (!user) {
-    throw new Error("Invalid username or password");
+    throw new ApiError("User not found", 404, "NOT_FOUND");
   }
 
   const isValid: boolean = await user.comparePassword(password);
 
   if (!isValid) {
-    throw new Error("Invalid username or password");
+    throw new ApiError("Incorrect credentials", 401, "AUTH_ERROR");
   }
 
   const token = generateToken(user._id.toString());
@@ -29,8 +42,18 @@ export const registerService = async (
   email: string,
   password: string,
 ) => {
-  if (!username || !email || !password) {
-    throw new Error("Please fill all fields");
+  const user = {
+    username,
+    email,
+    password,
+  };
+
+  const result = registerSchema.safeParse(user);
+
+  if (!result.success) {
+    throw result.error;
+  } else {
+    result.data;
   }
 
   const existingUser: IUser | null = await User.findOne({
@@ -38,14 +61,10 @@ export const registerService = async (
   });
 
   if (existingUser) {
-    throw new Error("User already exists");
+    throw new ApiError("User already exists", 400, "AUTH_ERROR");
   }
 
-  const newUser: IUser = await User.create({
-    username,
-    email,
-    password,
-  });
+  const newUser: IUser = await User.create(user);
 
   const token = generateToken(newUser._id.toString());
 
