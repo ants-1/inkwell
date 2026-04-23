@@ -7,6 +7,7 @@ import dotenv from "dotenv";
 
 import authRoutes from "./features/auth/authRoutes";
 import userRoutes from "./features/users/userRoutes";
+import noteRoutes from "./features/notes/noteRoutes";
 import { errorHandler } from "./middleware/errorHandler";
 
 dotenv.config();
@@ -42,6 +43,7 @@ app.use(passport.session());
 
 app.use("/", authRoutes);
 app.use("/", userRoutes);
+app.use("/", noteRoutes);
 
 app.get("/", (req, res) => {
   res.json({

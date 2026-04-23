@@ -33,6 +33,10 @@ export const updateUserService = async (
     $or: [{ username }, { email }],
   });
 
+  if (!existingUser) {
+    throw new ApiError("User not found", 404, "NOT_FOUND");
+  }
+
   if (existingUser) {
     if (existingUser.username === username) {
       throw new ApiError("Username already taken", 400, "DUPLICATE_USERNAME");
@@ -48,10 +52,6 @@ export const updateUserService = async (
     { username, email },
     { new: true, runValidators: true },
   ).select("-password");
-
-  if (!updatedUser) {
-    throw new ApiError("User not found", 404, "NOT_FOUND");
-  }
 
   return {
     user: updatedUser,

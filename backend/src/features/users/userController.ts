@@ -15,7 +15,7 @@ export const getUserController = async (
 
     const { user } = await getUserService(id);
 
-    res.status(200).json({ success: true, user });
+    res.status(200).json({ success: true, data: user });
   } catch (error) {
     next(error);
   }
@@ -57,7 +57,7 @@ export const updateUserPasswordController = async (
       newPassword,
     );
 
-    res.status(200).json({ success: true, data: { message } });
+    res.status(200).json({ success: true, message, data: [] });
   } catch (error) {
     next(error);
   }
