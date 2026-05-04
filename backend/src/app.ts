@@ -9,6 +9,7 @@ import authRoutes from "./features/auth/authRoutes";
 import userRoutes from "./features/users/userRoutes";
 import noteRoutes from "./features/notes/noteRoutes";
 import { errorHandler } from "./middleware/errorHandler";
+import { rateLimiter } from "./middleware/rateLimiter";
 
 dotenv.config();
 
@@ -40,6 +41,8 @@ app.use(
 // Passport config
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use("/", rateLimiter);
 
 app.use("/", authRoutes);
 app.use("/", userRoutes);
